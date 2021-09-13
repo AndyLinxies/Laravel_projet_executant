@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Avatar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AvatarController extends Controller
 {
@@ -14,7 +15,8 @@ class AvatarController extends Controller
      */
     public function index()
     {
-        //
+        $avatars = Avatar::all();
+        return view('pages.readAvatars', compact('avatars'));
     }
 
     /**
@@ -24,7 +26,7 @@ class AvatarController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.createAvatars');
     }
 
     /**
@@ -35,7 +37,11 @@ class AvatarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store= new Avatar;
+        $request->file('src')->storePublicly('img/','public');
+        $store->src = $request->file('src')->hashName();
+        $store->save();
+        return redirect('/dashboard/avatars');
     }
 
     /**
@@ -78,8 +84,14 @@ class AvatarController extends Controller
      * @param  \App\Models\Avatar  $avatar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Avatar $avatar)
+    public function destroy($id)
     {
-        //
+        //Supprime quand meme ce qu'il ne faut pas
+        $destroy = Avatar::find($id);
+        if ($destroy->src != 'avatarFemme1.jpg'||$destroy->src != 'avatarFemme2.jpg'||$destroy->src !='imgAvatar1.jpg'||$destroy->src !='imgAvatar2.jpg'||$destroy->sr != 'imgAvatar3.jpg') {
+            Storage::disk('public')->delete('img/'.$destroy->src);
+            $destroy->delete();
+        }
+        return redirect('/dashboard/avatars');
     }
 }

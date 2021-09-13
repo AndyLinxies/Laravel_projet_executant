@@ -49,4 +49,7 @@ class User extends Authenticatable
     public function avatars(){
         return $this->belongsTo('App\Models\Avatar', 'avatar_id', 'id');
     }
+    public function roles(){
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
+    }
 }
