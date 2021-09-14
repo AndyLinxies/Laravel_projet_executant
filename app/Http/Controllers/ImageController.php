@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -14,7 +16,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $images=Image::all();
+        return view('pages.readImages',compact('images'));
     }
 
     /**
@@ -24,7 +27,8 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        $categories= Categorie::all();
+        return view('pages.createImages',compact('categories'));
     }
 
     /**
@@ -35,7 +39,12 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store= new Image;
+        $request->file('src')->storePublicly('img/','public');
+        $store->src = $request->file('src')->hashName();
+        $store->categorie_id=$request->categorie_id;
+        $store->save();
+        return redirect('/dashboard/images');
     }
 
     /**
@@ -78,8 +87,14 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function destroy($id)
     {
-        //
+        $destroy= Image::find($id);
+        $destroy->delete();
+        return redirect()->back();
+    }
+    public function download($id){
+        $download= Image::find($id);
+        return Storage::disk('public')->download('img/'.$download->src);
     }
 }

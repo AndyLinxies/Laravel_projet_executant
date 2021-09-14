@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avatar;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AllUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users=User::all();
+        return view('pages.readAllUsers',compact('users'));
     }
 
     /**
@@ -56,7 +60,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit=User::find($id);
+        $roles=Role::all();
+        $avatars=Avatar::all();
+        return view('pages.editAllUser',compact('edit','roles','avatars'));
     }
 
     /**
@@ -68,7 +75,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

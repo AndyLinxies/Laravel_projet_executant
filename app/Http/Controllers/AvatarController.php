@@ -38,6 +38,7 @@ class AvatarController extends Controller
     public function store(Request $request)
     {
         $store= new Avatar;
+        $store->name= $request->name;
         $request->file('src')->storePublicly('img/','public');
         $store->src = $request->file('src')->hashName();
         $store->save();
@@ -88,10 +89,7 @@ class AvatarController extends Controller
     {
         //Supprime quand meme ce qu'il ne faut pas
         $destroy = Avatar::find($id);
-        if ($destroy->src != 'avatarFemme1.jpg'||$destroy->src != 'avatarFemme2.jpg'||$destroy->src !='imgAvatar1.jpg'||$destroy->src !='imgAvatar2.jpg'||$destroy->sr != 'imgAvatar3.jpg') {
-            Storage::disk('public')->delete('img/'.$destroy->src);
-            $destroy->delete();
-        }
-        return redirect('/dashboard/avatars');
+        $destroy->delete();
+        return redirect()->back();
     }
 }

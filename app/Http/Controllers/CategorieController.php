@@ -14,7 +14,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories=Categorie::all();
+        return view('pages.readCategories',compact('categories'));
     }
 
     /**
@@ -24,7 +25,8 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('pages.createCategories');
     }
 
     /**
@@ -35,7 +37,10 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store= new Categorie;
+        $store->name=$request->name;
+        $store->save();
+        return redirect('/dashboard/categories');
     }
 
     /**
@@ -55,9 +60,10 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit($id)
     {
-        //
+        $edit=Categorie::find($id);
+        return view('pages.editCategories',compact('edit'));
     }
 
     /**
@@ -67,9 +73,12 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request,$id)
     {
-        //
+        $update=Categorie::find($id);
+        $update->name=$request->name;
+        $update->save();
+        return redirect('/dashboard/categories');
     }
 
     /**
@@ -78,8 +87,10 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy($id)
     {
-        //
+        $destroy=Categorie::find($id);
+        $destroy->delete();
+        return redirect()->back();
     }
 }
