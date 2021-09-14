@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class AvatarController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('isAdmin');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,12 @@ class AvatarController extends Controller
      */
     public function create()
     {
-        return view('pages.createAvatars');
+        $avatars = Avatar::all();
+        if (count($avatars)< 5) {
+            return view('pages.createAvatars');
+        }else{
+            return redirect()->back()->with('warning','Limite maximale de 5 avatars atteinte');
+        }
     }
 
     /**
@@ -37,12 +47,17 @@ class AvatarController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'src'=>'required|image',
+        ]);
+
         $store= new Avatar;
         $store->name= $request->name;
         $request->file('src')->storePublicly('img/','public');
         $store->src = $request->file('src')->hashName();
         $store->save();
-        return redirect('/dashboard/avatars');
+        return redirect('/dashboard/avatars')->with('success','Avatar créé avec succès');
     }
 
     /**
@@ -90,6 +105,6 @@ class AvatarController extends Controller
         //Supprime quand meme ce qu'il ne faut pas
         $destroy = Avatar::find($id);
         $destroy->delete();
-        return redirect()->back();
+        return redirect()->back()->with('warning','Avatar supprimé avec succès');
     }
 }

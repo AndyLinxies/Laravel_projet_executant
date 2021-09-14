@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('isAdmin')->only(['index', 'store','create','destroy']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,12 +44,16 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'src'=>'required|image',
+        ]);
+
         $store= new Image;
         $request->file('src')->storePublicly('img/','public');
         $store->src = $request->file('src')->hashName();
         $store->categorie_id=$request->categorie_id;
         $store->save();
-        return redirect('/dashboard/images');
+        return redirect('/dashboard/images')->with('success','Image créée avec succès');
     }
 
     /**
@@ -91,7 +100,7 @@ class ImageController extends Controller
     {
         $destroy= Image::find($id);
         $destroy->delete();
-        return redirect()->back();
+        return redirect()->back()->with('warning','Image supprimée avec succès');
     }
     public function download($id){
         $download= Image::find($id);

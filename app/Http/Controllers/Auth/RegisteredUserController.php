@@ -86,6 +86,6 @@ class RegisteredUserController extends Controller
         $update->role_id = 2;
         $update->password = Hash::make($request->password);
         $update->save();
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('success','Compte modifié avec succès');
     }
 }

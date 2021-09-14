@@ -56,8 +56,8 @@
                 <x-label for="role" :value="__('Role')" />
                 <select name="role_id" id="role">
                     @foreach ($roles as $role )
-
-                    <option value="{{$role->id}}">{{$role->role}}</option>
+                    
+                    <option {{$loop->iteration==2?'selected':null}} value="{{$role->id}}">{{$role->role}}</option>
 
                     @endforeach
                 </select>

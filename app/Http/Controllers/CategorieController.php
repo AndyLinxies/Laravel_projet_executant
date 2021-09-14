@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class CategorieController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('isAdmin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,10 +41,14 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
         $store= new Categorie;
         $store->name=$request->name;
         $store->save();
-        return redirect('/dashboard/categories');
+        return redirect('/dashboard/categories')->with('success','Catégorie créée avec succès');
     }
 
     /**
@@ -78,7 +86,7 @@ class CategorieController extends Controller
         $update=Categorie::find($id);
         $update->name=$request->name;
         $update->save();
-        return redirect('/dashboard/categories');
+        return redirect('/dashboard/categories')->with('success','Avatar modifiée avec succès');
     }
 
     /**
@@ -91,6 +99,6 @@ class CategorieController extends Controller
     {
         $destroy=Categorie::find($id);
         $destroy->delete();
-        return redirect()->back();
+        return redirect()->back()->with('warning','Catégorie supprimée avec succès');
     }
 }

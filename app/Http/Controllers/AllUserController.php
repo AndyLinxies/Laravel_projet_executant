@@ -6,9 +6,14 @@ use App\Models\Avatar;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AllUserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('isAdmin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,7 @@ class AllUserController extends Controller
      */
     public function index()
     {
-        $users=User::all();
+        $users = User::paginate(5);
         return view('pages.readAllUsers',compact('users'));
     }
 
@@ -75,7 +80,25 @@ class AllUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'age'=> ['required'],
+            'avatar_id' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required'],
+            
+        ]);
+        $update = User::find($id);
+        $update->firstName = $request->firstName;
+        $update->lastName = $request->lastName;
+        $update->email = $request->email;
+        $update->age = $request->age;
+        $update->avatar_id = $request->avatar_id;
+        $update->role_id = $request->role_id;
+        $update->password = Hash::make($request->password);
+        $update->save();
+        return redirect('/dashboard')->with('success','Utilisateur modifié avec succès');
     }
 
     /**

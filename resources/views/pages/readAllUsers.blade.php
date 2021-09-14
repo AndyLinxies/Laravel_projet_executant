@@ -30,6 +30,10 @@
         @endforeach
     </tbody>
 </table>
-
+<div class="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
+    <div class="flex items-center">
+        {{$users->links()}}
+    </div>
+</div>
 
 @endsection
