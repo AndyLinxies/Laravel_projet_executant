@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         @foreach ($images as $image)
-            <tr class='bg-purple-600 bg-opacity-50 h-14 border-b-2 border-purple-900 td '>
+            <tr class='bg-purple-600 bg-opacity-50 h-14 border-b-2 border-purple-900 td hover:bg-purple-700'>
                 <td >{{$image->id}}</td>
                 <td class='m-5'>{{$image->src}}</td>
                 <td>

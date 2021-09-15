@@ -1,5 +1,5 @@
 
-    <div class="flex flex-col w-64 h-screen py-8 bg-white border-r dark:bg-gray-800 dark:border-gray-600">
+    <div class="flex flex-col w-64 h-screen py-8 bg-white dark:bg-gray-800 dark:border-gray-600 border-r-4 ">
 
         <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-24 h-24 mx-2 rounded-lg border-2 border-gray" src="{{asset('img/'.Auth::user()->avatars->src)}}" alt="avatar">

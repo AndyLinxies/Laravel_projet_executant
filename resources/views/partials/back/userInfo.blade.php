@@ -10,8 +10,12 @@
             <p class="text-sm text-gray-700 dark:text-gray-200">Email: {{Auth::user()->email}}</p>
             <p class="text-sm text-gray-700 dark:text-gray-200">Role: {{Auth::user()->roles->role}}</p>
             <div class='mt-3'>
-
+                @if (Auth::user()->role_id ==1)
+                <a href="/dashboard/users/{{Auth::user()->id }}/edit" class="ml-2 px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-600 rounded-md dark:bg-gray-800 hover:bg-green-500 dark:hover:bg-gray-700 focus:outline-none focus:bg-blue-500 dark:focus:bg-gray-700">Edit</a>
+                @else
+                
                 <a href="/dashboard/userInfo/{{Auth::user()->id }}/edit" class="px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-600 rounded-md dark:bg-gray-800 hover:bg-green-500 dark:hover:bg-gray-700 focus:outline-none focus:bg-blue-500 dark:focus:bg-gray-700">Edit</a>
+                @endif
             </div>
         </div>
     </div>

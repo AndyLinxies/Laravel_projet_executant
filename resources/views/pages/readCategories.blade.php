@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         @foreach ($categories as $categorie)
-            <tr class='bg-purple-600 bg-opacity-50 h-11 border-b-2 border-purple-900 td'>
+            <tr class='bg-purple-600 bg-opacity-50 h-11 border-b-2 border-purple-900 td hover:bg-purple-700'>
                 <td>{{$categorie->id}}</td>
                 <td>{{$categorie->name}}</td>
                 <td class="mt-1"> 

@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         @foreach ($avatars as $avatar)
-            <tr class='bg-purple-600 bg-opacity-50 border-b-2 border-purple-900 td '>
+            <tr class='bg-purple-600 bg-opacity-50 border-b-2 border-purple-900 td hover:bg-purple-700'>
                 <td>{{$avatar->id}}</td>
                 <td class='m-5'>{{$avatar->name}}</td>
                 <td>
