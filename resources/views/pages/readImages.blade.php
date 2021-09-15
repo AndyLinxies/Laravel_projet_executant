@@ -2,7 +2,7 @@
 @section('content_bo')
 <table class="table-auto text-center">
     <thead>
-        <tr class='bg-purple-600 bg-opacity-100'>
+        <tr class='bg-purple-600 bg-opacity-100 td'>
             <th class='w-1/4 h-1/2'>#</th>
             <th class='w-1/2'>Image Name</th>
             <th class='w-1/4'>Image</th>
@@ -12,14 +12,14 @@
     </thead>
     <tbody>
         @foreach ($images as $image)
-            <tr class='bg-purple-600 bg-opacity-50 h-14 '>
-                <td>{{$image->id}}</td>
-                <td class='m-5 '>{{$image->src}}</td>
+            <tr class='bg-purple-600 bg-opacity-50 h-14 border-b-2 border-purple-900 td '>
+                <td >{{$image->id}}</td>
+                <td class='m-5'>{{$image->src}}</td>
                 <td>
                     <img width='200px' src="{{asset('img/'.$image->src)}}" class='img-responsive rounded-full my-1'>
                 </td>
                 <td>{{$image->categories->name}}</td>
-                <td class="mt-1"> 
+                <td class="mt-1 td"> 
                     <form action="/dashboard/images/{{$image->id}}" method='post'>
                         @csrf
                         @method('delete')

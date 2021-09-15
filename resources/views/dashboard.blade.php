@@ -17,5 +17,33 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script>
+        
+        gsap.from(".cardUser", {
+            duration: 0.5,
+            scale: 0,
+            y: 80,
+            ease: "power1.inOut",
+            stagger: {
+                grid: [7, 15],
+                from: 11,
+                amount: 0.5
+            }
+        });
+        gsap.from(".td", {
+            duration: 0.5,
+            scale: 0.5,
+            y: -500,
+            ease: "back.out(1.7)",
+            stagger: {
+                grid: [7, 15],
+                from: 11,
+                amount: 1
+            }
+        });
+
+
+    </script>
 </x-app-layout>
 

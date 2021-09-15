@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avatar;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +21,9 @@ class AvatarController extends Controller
      */
     public function index()
     {
-        $avatars = Avatar::all();
+        //Prend tout sauf celui à la fin. A l'id 6
+        $avatars = Avatar::all()->whereNotIn('id',6);
+        
         return view('pages.readAvatars', compact('avatars'));
     }
 
@@ -102,8 +105,16 @@ class AvatarController extends Controller
      */
     public function destroy($id)
     {
-        //Supprime quand meme ce qu'il ne faut pas
         $destroy = Avatar::find($id);
+
+        //Quand on supprime il Prend dabord tous les users pour lesquels leur avatar_id est égal à l'avatar qui nous concerne.
+        //Sur tous ces users selectionné il met leur avatar_id 6 (s'ils n'en ont plus).
+        $users = User::all()->where('avatar_id',$destroy->id);
+        foreach ($users as $user) {
+            $user->avatar_id = 6;
+            $user->save();
+        }
+
         $destroy->delete();
         return redirect()->back()->with('warning','Avatar supprimé avec succès');
     }

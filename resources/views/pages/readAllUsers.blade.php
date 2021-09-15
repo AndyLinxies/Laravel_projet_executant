@@ -2,7 +2,7 @@
 @section('content_bo')
 <table class="table-auto text-center">
     <thead>
-        <tr class='bg-purple-600 bg-opacity-100 h-10 alert-dismissible w-full'>
+        <tr class='bg-purple-600 bg-opacity-100 h-10 alert-dismissible w-full td'>
             <th class='w-1/4'>#</th>
             <th class='w-1/4'>Fist Name</th>
             <th class='w-1/4'>Last Name</th>
@@ -11,11 +11,12 @@
             <th class='w-1/4'>Role_id</th>
             <th class='w-1/4'>Email</th>
             <th class='w-1/4'></th>
+            <th class='w-1/4'></th>
         </tr>
     </thead>
     <tbody>
         @foreach ($users as $user)
-            <tr class='bg-purple-600 bg-opacity-50 h-14 '>
+            <tr class='bg-purple-600 bg-opacity-50 h-14 border-b-2 border-purple-900 td'>
                 <td>{{$user->id}}</td>
                 <td class='m-5 '>{{$user->firstName}}</td>
                 <td class='m-5'>{{$user->lastName}}</td>
@@ -25,6 +26,13 @@
                 <td>{{$user->email}}</td>
                 <td>
                     <a href="/dashboard/users/{{$user->id }}/edit" class="ml-2 px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-600 rounded-md dark:bg-gray-800 hover:bg-green-500 dark:hover:bg-gray-700 focus:outline-none focus:bg-blue-500 dark:focus:bg-gray-700">Edit</a>
+                </td>
+                <td class="mt-2"> 
+                    <form action="/dashboard/users/{{$user->id}}" method='post'>
+                        @csrf
+                        @method('delete')
+                        <button type='submit' class="px-3 py-2 ml-1  font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-600 rounded-md dark:bg-gray-800 hover:bg-green-500 dark:hover:bg-gray-700 focus:outline-none focus:bg-blue-500 dark:focus:bg-gray-700 mr-2">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

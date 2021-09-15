@@ -27,7 +27,7 @@ class AvatarSeeder extends Seeder
             ],
             [
                 'name'=>'Avatar3',
-                'src'=>'imgAvatar2.jpg'
+                'src'=>'imgAvatar3.jpg'
 
             ],
             [
@@ -39,6 +39,10 @@ class AvatarSeeder extends Seeder
                 'name'=>'Femme2',
                 'src'=>'avatarFemme2.jpg'
 
+            ],
+            [
+                'name'=>'default',
+                'src'=>'defaultAvatar.jpg'
             ],
         ]);
     }

@@ -2,7 +2,7 @@
 @section('content_bo')
 <table class="table-auto text-center">
     <thead>
-        <tr class='bg-purple-600 bg-opacity-100 h-10'>
+        <tr class='bg-purple-600 bg-opacity-100 h-10 td'>
             <th class='w-1/4'>#</th>
             <th class='w-1/2'>Category's Name</th>
             <th class='w-1/4'></th>
@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         @foreach ($categories as $categorie)
-            <tr class='bg-purple-600 bg-opacity-50 h-11'>
+            <tr class='bg-purple-600 bg-opacity-50 h-11 border-b-2 border-purple-900 td'>
                 <td>{{$categorie->id}}</td>
                 <td>{{$categorie->name}}</td>
                 <td class="mt-1"> 

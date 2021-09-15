@@ -4,7 +4,7 @@
     <div class="grid grid-flow-col">
         @foreach ($images as $image)
             
-        <div class="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+        <div class="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 cardUser">
             <img class="object-cover object-center w-full h-56" src="{{asset('img/'.$image->src)}}" alt="avatar">
             
             <div class="flex items-center px-6 py-3 bg-gray-900 text-center justify-between">

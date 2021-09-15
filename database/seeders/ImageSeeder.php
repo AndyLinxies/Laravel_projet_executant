@@ -15,8 +15,14 @@ class ImageSeeder extends Seeder
     public function run()
     {
         DB::table('images')->insert([
-            'src' => 'image1.jpg',
-            'categorie_id'=> 1
+            [
+                'src' => 'image1.jpg',
+                'categorie_id'=> 1
+            ],
+            [
+                'src' => 'image2.jpg',
+                'categorie_id'=> 2
+            ],
         ]);
     }
 }

@@ -98,12 +98,15 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
+        $destroyCategorie= Categorie::find($id);
         $destroy= Image::find($id);
         $destroy->delete();
+        $destroyCategorie->delete();
         return redirect()->back()->with('warning','Image supprimée avec succès');
     }
     public function download($id){
         $download= Image::find($id);
+
         return Storage::disk('public')->download('img/'.$download->src);
     }
 }

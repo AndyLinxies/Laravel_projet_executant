@@ -34,6 +34,15 @@ class UserSeeder extends Seeder
                 'email'=> 'membre@membre.com',
                 'password'=> Hash::make('membre@membre.com'),
             ],
+            [
+                'firstName'=> 'Lagherta',
+                'lastName'=> 'Lodbrok',
+                'age'=> 35,
+                'avatar_id'=> 4,
+                'role_id'=> 2,
+                'email'=> 'membre2@membre2.com',
+                'password'=> Hash::make('membre2@membre2.com'),
+            ],
         ]);
 
     }

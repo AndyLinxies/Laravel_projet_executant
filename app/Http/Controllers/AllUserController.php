@@ -109,6 +109,8 @@ class AllUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destroy=User::find($id);
+        $destroy->delete();
+        return redirect()->back()->with('success','Utilisateur supprimé avec succès');
     }
 }

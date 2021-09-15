@@ -2,7 +2,7 @@
 @section('content_bo')
 <table class="table-auto text-center">
     <thead>
-        <tr class='bg-purple-600 bg-opacity-100 h-10'>
+        <tr class='bg-purple-600 bg-opacity-100 h-10 td'>
             <th class='w-1/4 h-1/2'>#</th>
             <th class='w-1/2'>Name</th>
             <th class='w-1/4'>Image</th>
@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         @foreach ($avatars as $avatar)
-            <tr class='bg-purple-600 bg-opacity-50  '>
+            <tr class='bg-purple-600 bg-opacity-50 border-b-2 border-purple-900 td '>
                 <td>{{$avatar->id}}</td>
                 <td class='m-5'>{{$avatar->name}}</td>
                 <td>

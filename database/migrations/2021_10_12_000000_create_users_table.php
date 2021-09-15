@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->integer('age');
-            $table->foreignId('avatar_id')->constrained('avatars')->onDelete('cascade');
+            $table->foreignId('avatar_id')->constrained('avatars');
             $table->foreignId('role_id')->constrained('roles');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
