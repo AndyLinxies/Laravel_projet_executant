@@ -3,6 +3,7 @@
 use App\Http\Controllers\AllUserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ImageController;
 use App\Models\Image;
@@ -34,6 +35,8 @@ Route::resource('/dashboard/avatars', AvatarController::class);
 Route::resource('/dashboard/images', ImageController::class);
 
 Route::resource('/dashboard/categories', CategorieController::class);
+
+Route::resource('/dashboard/blogs', BlogController::class);
 
 Route::get('/dashboard/galleries', function () {
     $images=Image::all();
