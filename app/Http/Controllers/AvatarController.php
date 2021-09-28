@@ -35,7 +35,7 @@ class AvatarController extends Controller
     public function create()
     {
         $avatars = Avatar::all();
-        if (count($avatars)< 5) {
+        if (count($avatars)<= 5) {
             return view('pages.createAvatars');
         }else{
             return redirect()->back()->with('warning','Limite maximale de 5 avatars atteinte');
